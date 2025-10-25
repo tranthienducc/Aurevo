@@ -112,11 +112,53 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@font-face {
+  font-family: "Redaction";
+  src: url("./fonts/Redaction/Redaction10Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Redaction";
+  src: url("./fonts/Redaction/Redaction50Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.2));
+  }
+  50% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.5));
+  }
+}
+
+.signal-path {
+  animation: signal-pulse 2s ease-in-out infinite; /* Pulse nhẹ cho dots sáng/tối, không chạy */
+  /* Không dùng dashoffset nữa, để tĩnh như ảnh */
+}
+
+/* Fallback nếu không có gradient: stroke đơn giản */
+svg path {
+  opacity: 0.6;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#000] text-foreground max-w-[1920px] w-full;
+  }
+}
+@layer components {
+  .flex-skrink-0 {
+    flex-shrink: 0;
   }
 }
